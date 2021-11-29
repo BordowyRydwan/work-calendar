@@ -1,33 +1,43 @@
 import datetime
 
-month = datetime.datetime.now().month
-year = datetime.datetime.now().year
+_day = datetime.datetime.now().day
+_month = datetime.datetime.now().month
+_year = datetime.datetime.now().year
 
-base_month = month
-base_year = year
+_base_day = _day
+_base_month = _month
+_base_year = _year
 
 
 def month_back():
-    global month, year
-    year_break = month == 1
+    global _month, _year
+    year_break = _month == 1
 
     if year_break:
-        year -= 1
-        month = 12
+        _year -= 1
+        _month = 12
     else:
-        month -= 1
+        _month -= 1
 
 
 def month_forward():
-    global month, year
-    year_break = month == 12
+    global _month, _year
+    year_break = _month == 12
 
     if year_break:
-        year += 1
-        month = 1
+        _year += 1
+        _month = 1
     else:
-        month += 1
+        _month += 1
+
+
+def is_day_current():
+    return _day == _base_day and is_month_current()
 
 
 def is_month_current():
-    return base_month == month and base_year == year
+    return _base_month == _month and _base_year == _year
+
+
+def set_day(day):
+    _day = day

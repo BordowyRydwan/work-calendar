@@ -10,11 +10,21 @@ class HiddenButton(Button):
     pass
 
 
-class NormalButton(Button):
+class DaySettableButton(Button):
+    def __init__(self, day, **kwargs):
+        super().__init__(**kwargs)
+        self.day = day
+        self.on_press = self.set_day
+
+    def set_day(self):
+        date.set_day(self.day)
+
+
+class NormalButton(DaySettableButton):
     pass
 
 
-class TodayButton(Button):
+class TodayButton(DaySettableButton):
     pass
 
 
@@ -34,16 +44,19 @@ class CalendarGrid(GridLayout):
         self.insert_grids()
 
     def set_date_props(self):
-        self.calendar = calendar.monthcalendar(date.year, date.month)
+        self.calendar = calendar.monthcalendar(date._year, date._month)
 
     def insert_grids(self):
         today = datetime.datetime.now()
 
         for week in self.calendar:
             for day in week:
+                button = HiddenButton()
+
+                if day != 0:
+                    button = NormalButton(text=str(day), day=day)
+
                 if day == today.day and date.is_month_current():
-                    self.add_widget(TodayButton(text=str(day)))
-                elif day != 0:
-                    self.add_widget(NormalButton(text=str(day)))
-                else:
-                    self.add_widget(HiddenButton())
+                    button = TodayButton(text=str(day), day=day)
+
+                self.add_widget(button)

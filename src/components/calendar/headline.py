@@ -21,4 +21,4 @@ class CalendarHeadline(GridLayout):
         self.set_month_name()
 
     def set_month_name(self):
-        self.content = f"{months[date.month]} {date.year}"
+        self.content = f"{months[date._month]} {date._year}"

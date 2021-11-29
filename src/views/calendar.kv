@@ -1,0 +1,114 @@
+#:kivy 2.0.0
+
+<HiddenButton>:
+    background_color: (18.0 / 255.0, 103.0 / 255.0, 130.0 / 255.0, 0.6)
+
+
+<NormalButton>:
+    background_color: (255.0 / 255.0, 255.0 / 255.0, 0.0 / 255.0, 1)
+    font_size: 20
+    bold: True
+    padding: (10, 10)
+    text_size: self.size
+    halign: 'right'
+    valign: 'bottom'
+
+<TodayButton>:
+    background_color: (0, 1, 1, 1)
+    font_size: 20
+    bold: True
+    padding: (10, 10)
+    text_size: self.size
+    halign: 'right'
+    valign: 'bottom'
+
+
+<CalendarHeadline>:
+    BoxLayout:
+        orientation: 'horizontal'
+        width: 300
+        pos: (self.parent.x + (self.parent.width - self.width) / 2, self.parent.y)
+
+        Button:
+            background_color: (0, 0, 0, 0)
+            text: '<'
+            font_size: 24
+            bold: True
+            center: self.parent.center
+            size_hint: (None, None)
+            size: 30, 30
+            on_press:
+                root.month_back()
+                root.parent.children[0].reload_grids()
+
+        Label:
+            font_size: 24
+            text_size: self.size
+            halign: 'center'
+            bold: True
+            center: self.parent.center
+            text: root.content
+
+        Button:
+            background_color: (0, 0, 0, 0)
+            text: '>'
+            font_size: 24
+            bold: True
+            center: self.parent.center
+            size_hint: (None, None)
+            size: 30, 30
+            on_press:
+                root.month_forward()
+                root.parent.children[0].reload_grids()
+
+
+<CalendarWeekdays>:
+    canvas.before:
+        Color:
+            rgba: (18.0 / 255.0, 103.0 / 255.0, 130.0 / 255.0, 0.2)
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<CalendarGrid>:
+    canvas.before:
+        Color:
+            rgba: (18.0 / 255.0, 103.0 / 255.0, 130.0 / 255.0, 0.2)
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<CalendarContainer>:
+    size: 900, 650
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 15
+        size: self.parent.size
+        center: self.parent.center
+
+        CalendarHeadline:
+            size_hint: (1, None)
+            height: 40
+
+        CalendarWeekdays:
+            size_hint: (1, None)
+            height: 40
+
+        CalendarGrid:
+            size_hint: (1, 1)
+
+
+<CalendarView>:
+    canvas.before:
+        Color:
+            rgba: (2.0 / 103.0, 48.0 / 255.0, 71.0 / 255.0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    CalendarContainer:
+        center: self.parent.center

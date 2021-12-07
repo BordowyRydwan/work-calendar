@@ -1,5 +1,6 @@
-from kivy.uix.widget import Widget
+from kivy.uix.floatlayout import FloatLayout
 
 
-class CalendarView(Widget):
-    pass
+class CalendarView(FloatLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)

@@ -1,23 +1,33 @@
 #:kivy 2.0.0
+#:import rgba helpers.color.rgba
 
 <HiddenButton>:
-    background_color: (18.0 / 255.0, 103.0 / 255.0, 130.0 / 255.0, 0.6)
+    background_color: rgba(108, 103, 130, 1)
 
 
 <NormalButton>:
-    background_color: (255.0 / 255.0, 255.0 / 255.0, 0.0 / 255.0, 1)
+    background_color: rgba(128, 255, 0, 1)
     font_size: 20
     bold: True
-    padding: (10, 10)
+    padding: (10, 5)
     text_size: self.size
     halign: 'right'
     valign: 'bottom'
 
 <TodayButton>:
-    background_color: (0, 1, 1, 1)
+    background_color: rgba(255, 255, 0, 1)
     font_size: 20
     bold: True
-    padding: (10, 10)
+    padding: (10, 5)
+    text_size: self.size
+    halign: 'right'
+    valign: 'bottom'
+
+<WorkButton>:
+    background_color: rgba(255, 0, 0, 1)
+    font_size: 20
+    bold: True
+    padding: (10, 5)
     text_size: self.size
     halign: 'right'
     valign: 'bottom'
@@ -30,7 +40,7 @@
         pos: (self.parent.x + (self.parent.width - self.width) / 2, self.parent.y)
 
         Button:
-            background_color: (0, 0, 0, 0)
+            background_color: rgba(0, 0, 0, 0)
             text: '<'
             font_size: 24
             bold: True
@@ -50,7 +60,7 @@
             text: root.content
 
         Button:
-            background_color: (0, 0, 0, 0)
+            background_color: rgba(0, 0, 0, 0)
             text: '>'
             font_size: 24
             bold: True
@@ -65,7 +75,7 @@
 <CalendarWeekdays>:
     canvas.before:
         Color:
-            rgba: (18.0 / 255.0, 103.0 / 255.0, 130.0 / 255.0, 0.2)
+            rgba: rgba(108, 103, 130, 0.2)
 
         Rectangle:
             pos: self.pos
@@ -73,16 +83,9 @@
 
 
 <CalendarGrid>:
-    canvas.before:
-        Color:
-            rgba: (18.0 / 255.0, 103.0 / 255.0, 130.0 / 255.0, 0.2)
-
-        Rectangle:
-            pos: self.pos
-            size: self.size
 
 <CalendarContainer>:
-    size: 900, 650
+    size: 500, 400
 
     BoxLayout:
         orientation: 'vertical'
@@ -101,14 +104,111 @@
         CalendarGrid:
             size_hint: (1, 1)
 
+<InputLabel>:
+    size_hint: None, None
+    size: 200, 50
+    orientation: 'vertical'
+    content: inputText
+    label_text: 'default'
+
+    Label:
+        background_color: rgba(255, 255, 255, 1)
+        size_hint: (None, None)
+        size: 20, 20
+        text: root.label_text
+
+    TextInput:
+        id: inputText
+        size_hint: (None, None)
+        size: 200, 30
+        input_type: 'number'
+        write_tab: False
+
+<WorkContainer>:
+    size: 200, 300
+
+    WorkInputs:
+        orientation: 'vertical'
+        spacing: 20
+        center: root.center
+
+        BoxLayout:
+            size_hint: None, None
+            size: 200, 50
+            orientation: 'vertical'
+
+            WorkDayTitle:
+                size_hint: None, None
+                size: self.parent.size
+                font_size: 24
+                bold: True
+
+
+        InputLabel:
+            id: label1
+            label_text: 'Od'
+
+        InputLabel:
+            id: label2
+            label_text: 'Do'
+
+        SaveButton:
+            size_hint: None, None
+            size: 200, 40
+            text: 'Zapisz'
+            on_press: self.save(label1, label2)
+
+        DeleteButton:
+            size_hint: None, None
+            size: 200, 40
+            text: 'Usuń'
+            on_press: self.delete(label1, label2)
+
+<HourCountContainer>:
+    size: 150, 30
+
+    BoxLayout:
+        size: self.parent.size
+        center: self.parent.center
+
+        Label:
+            size_hint: None, None
+            size: 100, 30
+            text: 'Godzin:'
+            font_size: 16
+            bold: True
+
+        HourCountInput:
+            size_hint: None, None
+            size: 50, 30
+            disabled: True
+            markup: True
+            halign: 'center'
+            background_disabled_normal: ''
+            color: 1, 1, 1, 1
+            background_normal: ''
+            background_color: rgba(255, 255, 255, 1)
+            disabled_foreground_color: rgba(0, 0, 0, 1)
+            font_size: 16
+
+    
 
 <CalendarView>:
     canvas.before:
         Color:
-            rgba: (2.0 / 103.0, 48.0 / 255.0, 71.0 / 255.0, 1)
+            rgba: rgba(20, 20, 20, 0.8)
         Rectangle:
             pos: self.pos
             size: self.size
 
     CalendarContainer:
-        center: self.parent.center
+        size_hint: (None, None)
+        pos: 30, (root.height - self.height) / 4
+
+    WorkContainer:
+        size_hint: (None, None)
+        pos: root.width - self.width - 75, 0
+
+    HourCountContainer:
+        size_hint: (None, None)
+        pos: root.width - self.width - 75, root.height - 75

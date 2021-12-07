@@ -2,11 +2,14 @@ from kivy.app import App
 from kivy.config import Config
 
 from components.calendar import *
+from components.work import *
+from components.hour_count import *
+from data.events import event
+
 from components.calendar.view import CalendarView
 
-Config.set('graphics', 'width', '1024')
-Config.set('graphics', 'height', '768')
-Config.set('graphics', 'resizable', False)
+Config.set('graphics', 'width', '800')
+Config.set('graphics', 'height', '600')
 Config.write()
 
 
@@ -14,7 +17,11 @@ class CalendarApp(App):
     kv_directory = 'views'
 
     def build(self):
-        return CalendarView()
+        self.root = CalendarView()
+        return self.root
+
+    def on_start(self):
+        event.download_data()
 
 
 if __name__ == '__main__':

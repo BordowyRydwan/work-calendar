@@ -1,7 +1,7 @@
 from kivy.uix.boxlayout import BoxLayout
 from data.events import event
 
-import data.date as date
+import helpers.date as dateHelper
 import os
 
 
@@ -14,7 +14,7 @@ class WorkInputs(BoxLayout):
     def load_info(self, *args):
         inputTo, inputFrom = self.children[2:4]
 
-        dayData = date.parse_to_file_data()
+        dayData = dateHelper.parse_to_file_data()
 
         directoryPath = f'{os.getcwd()}/src/database/{dayData["directory"]}'
         filePath = f'{directoryPath}/{dayData["fileName"]}'

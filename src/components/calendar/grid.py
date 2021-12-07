@@ -1,39 +1,14 @@
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.button import Button
 
-import data.date as date
 import calendar
 import datetime
+import data.date as date
+import helpers.date as dateHelper
 
 from os import listdir, getcwd
 from os.path import isfile, join, splitext, exists
 from data.events import event
-
-
-class HiddenButton(Button):
-    pass
-
-
-class DaySettableButton(Button):
-    def __init__(self, day, **kwargs):
-        super().__init__(**kwargs)
-        self.day = day
-        self.on_press = self.set_day
-
-    def set_day(self):
-        date.set_day(self.day)
-
-
-class NormalButton(DaySettableButton):
-    pass
-
-
-class TodayButton(DaySettableButton):
-    pass
-
-
-class WorkButton(DaySettableButton):
-    pass
+from components.calendar.buttons import *
 
 
 class CalendarGrid(GridLayout):
@@ -58,7 +33,7 @@ class CalendarGrid(GridLayout):
 
     def insert_grids(self):
         today = datetime.datetime.now()
-        monthDir = date.month_dir_for_calendar_view()
+        monthDir = dateHelper.month_dir_for_calendar_view()
         directoryPath = f'{getcwd()}/src/database/{monthDir}'
         daysAtWork = []
 
@@ -77,7 +52,7 @@ class CalendarGrid(GridLayout):
                 if day in daysAtWork:
                     button = WorkButton(text=str(day), day=day)
 
-                if day == today.day and date.is_month_current():
+                if day == today.day and dateHelper.is_month_current():
                     button = TodayButton(text=str(day), day=day)
 
                 self.add_widget(button)

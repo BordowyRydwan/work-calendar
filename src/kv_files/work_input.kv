@@ -1,0 +1,61 @@
+#:kivy 2.0.0
+
+<InputLabel>:
+    size_hint: None, None
+    size: 200, 50
+    orientation: 'vertical'
+    content: inputText
+    label_text: 'default'
+
+    Label:
+        background_color: rgba(255, 255, 255, 1)
+        size_hint: (None, None)
+        size: 20, 20
+        text: root.label_text
+
+    TextInput:
+        id: inputText
+        size_hint: (None, None)
+        size: 200, 30
+        input_type: 'number'
+        write_tab: False
+
+<WorkContainer>:
+    size: 200, 300
+
+    WorkInputs:
+        orientation: 'vertical'
+        spacing: 20
+        center: root.center
+
+        BoxLayout:
+            size_hint: None, None
+            size: 200, 50
+            orientation: 'vertical'
+
+            WorkDayTitle:
+                size_hint: None, None
+                size: self.parent.size
+                font_size: 24
+                bold: True
+
+
+        InputLabel:
+            id: label1
+            label_text: 'Od'
+
+        InputLabel:
+            id: label2
+            label_text: 'Do'
+
+        SaveButton:
+            size_hint: None, None
+            size: 200, 40
+            text: 'Zapisz'
+            on_press: self.save(label1, label2)
+
+        DeleteButton:
+            size_hint: None, None
+            size: 200, 40
+            text: 'Usuń'
+            on_press: self.delete(label1, label2)

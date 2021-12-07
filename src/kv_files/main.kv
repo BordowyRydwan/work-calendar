@@ -1,0 +1,25 @@
+#:kivy 2.0.0
+#:include kv_files/work_input.kv
+#:include kv_files/hour_count.kv
+#:include kv_files/calendar.kv
+
+
+<CalendarView>:
+    canvas.before:
+        Color:
+            rgba: rgba(20, 20, 20, 0.8)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    CalendarContainer:
+        size_hint: (None, None)
+        pos: 30, (root.height - self.height) / 4
+
+    WorkContainer:
+        size_hint: (None, None)
+        pos: root.width - self.width - 75, 0
+
+    HourCountContainer:
+        size_hint: (None, None)
+        pos: root.width - self.width - 75, root.height - 75

@@ -2,7 +2,7 @@ from kivy.uix.button import Button
 from data.events import event
 
 import os
-import data.date as date
+import helpers.date as dateHelper
 
 
 class SaveButton(Button):
@@ -14,7 +14,7 @@ class SaveButton(Button):
             return
 
         hours = [labelFrom.content.text, labelTo.content.text]
-        dayData = date.parse_to_file_data()
+        dayData = dateHelper.parse_to_file_data()
 
         directoryPath = f'{os.getcwd()}/src/database/{dayData["directory"]}'
         filePath = f'{directoryPath}/{dayData["fileName"]}'

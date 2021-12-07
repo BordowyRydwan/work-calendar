@@ -1,9 +1,9 @@
 from kivy.uix.textinput import TextInput
 from os import listdir, getcwd
 from os.path import join, exists
-from data.events import event
 
-import data.date as date
+from data.events import event
+import helpers.date as dateHelper
 
 
 class HourCountInput(TextInput):
@@ -14,7 +14,7 @@ class HourCountInput(TextInput):
         self.fill_text()
 
     def fill_text(self, *args):
-        monthDir = date.month_dir_for_calendar_view()
+        monthDir = dateHelper.month_dir_for_calendar_view()
         directoryPath = f'{getcwd()}/src/database/{monthDir}'
         sum = 0
 

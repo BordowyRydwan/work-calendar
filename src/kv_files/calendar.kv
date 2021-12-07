@@ -1,0 +1,77 @@
+#:kivy 2.0.0
+#:import rgba helpers.color.rgba
+
+
+<CalendarHeadline>:
+    BoxLayout:
+        orientation: 'horizontal'
+        width: 300
+        pos: (self.parent.x + (self.parent.width - self.width) / 2, self.parent.y)
+
+        Button:
+            background_color: rgba(0, 0, 0, 0)
+            text: '<'
+            font_size: 24
+            bold: True
+            center: self.parent.center
+            size_hint: (None, None)
+            size: 30, 30
+            on_press:
+                root.month_back()
+                root.parent.children[0].reload_grids()
+
+        Label:
+            font_size: 24
+            text_size: self.size
+            halign: 'center'
+            bold: True
+            center: self.parent.center
+            text: root.content
+
+        Button:
+            background_color: rgba(0, 0, 0, 0)
+            text: '>'
+            font_size: 24
+            bold: True
+            center: self.parent.center
+            size_hint: (None, None)
+            size: 30, 30
+            on_press:
+                root.month_forward()
+                root.parent.children[0].reload_grids()
+
+
+<CalendarWeekdays>:
+    canvas.before:
+        Color:
+            rgba: rgba(108, 103, 130, 0.2)
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<CalendarGrid>:
+
+<CalendarContainer>:
+    size: 500, 400
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 15
+        size: self.parent.size
+        center: self.parent.center
+
+        CalendarHeadline:
+            size_hint: (1, None)
+            height: 40
+
+        CalendarWeekdays:
+            size_hint: (1, None)
+            height: 40
+
+        CalendarGrid:
+            size_hint: (1, 1)
+    
+
+

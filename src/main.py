@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.config import Config
+from kivy.lang import Builder
 
 from components.calendar import *
 from components.work import *
@@ -12,9 +13,11 @@ Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '600')
 Config.write()
 
+Builder.load_file('kv_files/main.kv')
+Builder.load_file('kv_files/calendar_buttons.kv')
+
 
 class CalendarApp(App):
-    kv_directory = 'views'
 
     def build(self):
         self.root = CalendarView()

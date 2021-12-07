@@ -1,0 +1,29 @@
+#:kivy 2.0.0
+#:import rgba helpers.color.rgba
+
+<HourCountContainer>:
+    size: 150, 30
+
+    BoxLayout:
+        size: self.parent.size
+        center: self.parent.center
+
+        Label:
+            size_hint: None, None
+            size: 100, 30
+            text: 'Godzin:'
+            font_size: 16
+            bold: True
+
+        HourCountInput:
+            size_hint: None, None
+            size: 50, 30
+            disabled: True
+            markup: True
+            halign: 'center'
+            background_disabled_normal: ''
+            color: 1, 1, 1, 1
+            background_normal: ''
+            background_color: rgba(255, 255, 255, 1)
+            disabled_foreground_color: rgba(0, 0, 0, 1)
+            font_size: 16

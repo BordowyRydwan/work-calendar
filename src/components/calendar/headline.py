@@ -2,6 +2,8 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.properties import StringProperty
 
 from helpers.months import months
+
+import helpers.date as dateHelper
 import data.date as date
 
 
@@ -13,11 +15,11 @@ class CalendarHeadline(GridLayout):
         self.set_month_name()
 
     def month_back(self):
-        date.month_back()
+        dateHelper.month_back()
         self.set_month_name()
 
     def month_forward(self):
-        date.month_forward()
+        dateHelper.month_forward()
         self.set_month_name()
 
     def set_month_name(self):

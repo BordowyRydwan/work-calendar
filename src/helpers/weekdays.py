@@ -1,2 +1,2 @@
-days = ['Poniedzialek', 'Wtorek', 'Sroda',
-        'Czwartek', 'Piatek', 'Sobota', 'Niedziela']
+days = ['Pon', 'Wt', 'Śr',
+        'Czw', 'Pt', 'Sob', 'Nie']

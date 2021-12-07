@@ -2,7 +2,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.properties import StringProperty
 
 from helpers.months import months
-import data.month_year as date
+import data.date as date
 
 
 class CalendarHeadline(GridLayout):
@@ -21,4 +21,4 @@ class CalendarHeadline(GridLayout):
         self.set_month_name()
 
     def set_month_name(self):
-        self.content = f"{months[date.month]} {date.year}"
+        self.content = f"{months[date.calendarView.month]} {date.calendarView.year}"

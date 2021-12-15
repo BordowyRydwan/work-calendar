@@ -1,6 +1,7 @@
 from kivy.uix.button import Button
 from src.data.events import event
 from src.helpers.file import get_db_root
+from src.components.work.popup import WorkPopup
 from os.path import join
 
 import os
@@ -30,16 +31,24 @@ class SaveButton(Button):
         event.reload_grid()
 
     def check_inputs(self, input1, input2):
+        popup = WorkPopup("Błąd zapisu danych")
+
         if not (input1.isnumeric() and input2.isnumeric()):
-            return False
+            popup.error = "Wejście zawiera znaki nienumeryczne!"
+            popup.open()
+            return
 
         num1 = int(input1)
         num2 = int(input2)
 
         if num1 >= num2:
+            popup.error = "Godzina końca zmiany jest wcześniejsza od jej początku!"
+            popup.open()
             return False
 
         if not ((num1 in range(0, 25)) and (num2 in range(0, 25))):
+            popup.error = "Godziny zawierają się w przedziale [0; 24]"
+            popup.open()
             return False
 
         return True

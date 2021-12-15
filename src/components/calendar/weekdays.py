@@ -1,7 +1,7 @@
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 
-from helpers.weekdays import days
+from src.helpers.weekdays import days
 
 
 class CalendarWeekdays(GridLayout):

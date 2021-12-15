@@ -15,6 +15,7 @@ Config.write()
 
 Builder.load_file('kv_files/main.kv')
 Builder.load_file('kv_files/calendar_buttons.kv')
+Builder.load_file('kv_files/work_popup.kv')
 
 
 class CalendarApp(App):

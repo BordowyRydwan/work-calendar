@@ -1,4 +1,5 @@
 #:kivy 2.0.0
+#:import rgba src.helpers.color.rgba
 
 <InputLabel>:
     size_hint: None, None
@@ -53,9 +54,11 @@
             size: 200, 40
             text: 'Zapisz'
             on_press: self.save(label1, label2)
+            background_color: rgba(80, 80, 80, 1)
 
         DeleteButton:
             size_hint: None, None
             size: 200, 40
             text: 'Usuń'
             on_press: self.delete(label1, label2)
+            background_color: rgba(80, 80, 80, 1)

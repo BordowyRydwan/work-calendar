@@ -50,10 +50,10 @@ class CalendarGrid(GridLayout):
                 if day != 0:
                     button = NormalButton(text=str(day), day=day)
 
-                if day in days_at_work:
-                    button = WorkButton(text=str(day), day=day)
-
                 if day == today.day and date_helper.is_month_current():
                     button = TodayButton(text=str(day), day=day)
+
+                if day in days_at_work:
+                    button = WorkButton(text=str(day), day=day)
 
                 self.add_widget(button)

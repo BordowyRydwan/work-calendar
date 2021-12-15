@@ -1,0 +1,17 @@
+#:kivy 2.0.0
+
+<WorkPopup>:
+    error: 'test'
+    size_hint: 0.6, 0.5
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            size_hint: 1, 0.7
+            text: root.error
+
+        Button:
+            size_hint: 1, 0.15
+            text: 'Zamknij okno błędu'
+            on_release: root.dismiss()

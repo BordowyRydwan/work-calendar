@@ -16,5 +16,11 @@ README in Polish: [LINK](README_PL.md)
 - Python 3.9.7
 - Kivy
 
+## Development environment running instructions
+1. Run `python -m pip install kivy[base]`
+2. Run /src/main.py
+
+
+
 ## Preview
 ![Preview Image](images/overview.png)

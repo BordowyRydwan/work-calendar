@@ -1,10 +1,5 @@
 from kivy.uix.button import Button
-
-import helpers.date as dateHelper
-
-
-class HiddenButton(Button):
-    pass
+import src.helpers.date as date_helper
 
 
 class DaySettableButton(Button):
@@ -14,7 +9,11 @@ class DaySettableButton(Button):
         self.on_press = self.set_day
 
     def set_day(self):
-        dateHelper.set_day(self.day)
+        date_helper.set_day(self.day)
+
+
+class HiddenButton(Button):
+    pass
 
 
 class NormalButton(DaySettableButton):

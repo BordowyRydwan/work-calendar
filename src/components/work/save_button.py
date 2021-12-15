@@ -1,28 +1,30 @@
 from kivy.uix.button import Button
-from data.events import event
+from src.data.events import event
+from src.helpers.file import get_db_root
+from os.path import join
 
 import os
-import helpers.date as dateHelper
+import src.helpers.date as date_helper
 
 
 class SaveButton(Button):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def save(self, labelFrom, labelTo):
-        if not self.check_inputs(labelFrom.content.text, labelTo.content.text):
+    def save(self, label_from, label_to):
+        if not self.check_inputs(label_from.content.text, label_to.content.text):
             return
 
-        hours = [labelFrom.content.text, labelTo.content.text]
-        dayData = dateHelper.parse_to_file_data()
+        hours = [label_from.content.text, label_to.content.text]
+        day_data = date_helper.parse_to_file_data()
 
-        directoryPath = f'{os.getcwd()}/src/database/{dayData["directory"]}'
-        filePath = f'{directoryPath}/{dayData["fileName"]}'
+        directory_path = join(get_db_root(), day_data["directory"])
+        file_path = join(directory_path, day_data["fileName"])
 
-        if not os.path.exists(directoryPath):
-            os.mkdir(directoryPath)
+        if not os.path.exists(directory_path):
+            os.mkdir(directory_path)
 
-        with open(filePath, 'w') as file:
+        with open(file_path, 'w') as file:
             file.write('\n'.join(hours))
 
         event.reload_grid()

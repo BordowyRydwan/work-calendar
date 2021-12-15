@@ -1,9 +1,10 @@
 from kivy.uix.textinput import TextInput
-from os import listdir, getcwd
+from os import listdir
 from os.path import join, exists
 
-from data.events import event
-import helpers.date as dateHelper
+from src.data.events import event
+from src.helpers.file import get_db_root
+import src.helpers.date as date_helper
 
 
 class HourCountInput(TextInput):
@@ -14,21 +15,21 @@ class HourCountInput(TextInput):
         self.fill_text()
 
     def fill_text(self, *args):
-        monthDir = dateHelper.month_dir_for_calendar_view()
-        directoryPath = f'{getcwd()}/src/database/{monthDir}'
-        sum = 0
+        month_dir = date_helper.month_dir_for_calendar_view()
+        directory_path = join(get_db_root(), month_dir)
+        hours_sum = 0
 
-        if not exists(directoryPath):
-            self.text = str(sum)
+        if not exists(directory_path):
+            self.text = str(hours_sum)
             return
 
-        files = listdir(directoryPath)
+        files = listdir(directory_path)
 
         for fileName in files:
-            with open(join(directoryPath, fileName)) as file:
+            with open(join(directory_path, fileName)) as file:
                 num1 = int(file.readline().rstrip())
                 num2 = int(file.readline().rstrip())
 
-                sum += num2 - num1
+                hours_sum += num2 - num1
 
-        self.text = str(sum)
+        self.text = str(hours_sum)

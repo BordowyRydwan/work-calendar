@@ -2,13 +2,14 @@ from kivy.uix.gridlayout import GridLayout
 
 import calendar
 import datetime
-import data.date as date
-import helpers.date as dateHelper
+import src.data.date as date
+import src.helpers.date as date_helper
 
-from os import listdir, getcwd
+from os import listdir
 from os.path import isfile, join, splitext, exists
-from data.events import event
-from components.calendar.buttons import *
+from src.data.events import event
+from src.helpers.file import get_db_root
+from src.components.calendar.buttons import *
 
 
 class CalendarGrid(GridLayout):
@@ -33,14 +34,14 @@ class CalendarGrid(GridLayout):
 
     def insert_grids(self):
         today = datetime.datetime.now()
-        monthDir = dateHelper.month_dir_for_calendar_view()
-        directoryPath = f'{getcwd()}/src/database/{monthDir}'
-        daysAtWork = []
+        month_dir = date_helper.month_dir_for_calendar_view()
+        directory_path = join(get_db_root(), month_dir)
+        days_at_work = []
 
-        if exists(directoryPath):
-            for file in listdir(directoryPath):
-                if isfile(join(directoryPath, file)):
-                    daysAtWork.append(int(splitext(file)[0]))
+        if exists(directory_path):
+            for file in listdir(directory_path):
+                if isfile(join(directory_path, file)):
+                    days_at_work.append(int(splitext(file)[0]))
 
         for week in self.calendar:
             for day in week:
@@ -49,10 +50,10 @@ class CalendarGrid(GridLayout):
                 if day != 0:
                     button = NormalButton(text=str(day), day=day)
 
-                if day in daysAtWork:
+                if day in days_at_work:
                     button = WorkButton(text=str(day), day=day)
 
-                if day == today.day and dateHelper.is_month_current():
+                if day == today.day and date_helper.is_month_current():
                     button = TodayButton(text=str(day), day=day)
 
                 self.add_widget(button)

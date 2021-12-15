@@ -1,23 +1,25 @@
 from kivy.uix.button import Button
-from data.events import event
+from src.data.events import event
+from src.helpers.file import get_db_root
+from os.path import join
 
 import os
-import helpers.date as dateHelper
+import src.helpers.date as date_helper
 
 
 class DeleteButton(Button):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def delete(self, labelFrom, labelTo):
-        self.empty_inputs(labelFrom, labelTo)
-        dayData = dateHelper.parse_to_file_data()
+    def delete(self, label_from, label_to):
+        self.empty_inputs(label_from, label_to)
+        day_data = date_helper.parse_to_file_data()
 
-        directoryPath = f'{os.getcwd()}/src/database/{dayData["directory"]}'
-        filePath = f'{directoryPath}/{dayData["fileName"]}'
+        directory_path = join(get_db_root(), day_data["directory"])
+        file_path = join(directory_path, day_data["fileName"])
 
-        if os.path.exists(filePath):
-            os.remove(filePath)
+        if os.path.exists(file_path):
+            os.remove(file_path)
 
         event.reload_grid()
 

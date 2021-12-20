@@ -9,6 +9,7 @@ import src.data.date as date
 
 class CalendarHeadline(GridLayout):
     content = StringProperty()
+    rows = 1
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

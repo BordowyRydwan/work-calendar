@@ -26,12 +26,17 @@ class SaveButton(Button):
             os.mkdir(directory_path)
 
         with open(file_path, 'w') as file:
-            file.write('\n'.join(hours))
+            file.write('\n'.join(map(lambda x: x.lstrip('0'), hours)))
 
         event.reload_grid()
 
     def check_inputs(self, input1, input2):
         popup = WorkPopup("Błąd zapisu danych")
+
+        if not (input1 and input2):
+            popup.error = "Wypełnij oba pola tekstowe!"
+            popup.open()
+            return
 
         if not (input1.isnumeric() and input2.isnumeric()):
             popup.error = "Wejście zawiera znaki nienumeryczne!"
@@ -41,13 +46,13 @@ class SaveButton(Button):
         num1 = int(input1)
         num2 = int(input2)
 
-        if num1 >= num2:
-            popup.error = "Godzina końca zmiany jest wcześniejsza od jej początku!"
+        if not ((num1 in range(0, 25)) and (num2 in range(0, 25))):
+            popup.error = "Godziny zawierają się w przedziale [0; 24]"
             popup.open()
             return False
 
-        if not ((num1 in range(0, 25)) and (num2 in range(0, 25))):
-            popup.error = "Godziny zawierają się w przedziale [0; 24]"
+        if num1 >= num2:
+            popup.error = "Godzina końca zmiany jest wcześniejsza od jej początku!"
             popup.open()
             return False
 

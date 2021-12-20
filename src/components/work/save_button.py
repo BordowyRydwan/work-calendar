@@ -14,6 +14,8 @@ class SaveButton(Button):
 
     def save(self, label_from, label_to):
         if not self.check_inputs(label_from.content.text, label_to.content.text):
+            label_from.content.text = ""
+            label_to.content.text = ""
             return
 
         hours = [label_from.content.text, label_to.content.text]
@@ -39,7 +41,10 @@ class SaveButton(Button):
             return
 
         if not (input1.isnumeric() and input2.isnumeric()):
-            popup.error = "Wejście zawiera znaki nienumeryczne!"
+            popup.error = """Wejście zawiera znaki nienumeryczne! 
+ 
+Wpisz liczbę całkowitą. Przypominamy też, że 
+system pracy obsługuje tylko pełne godziny."""
             popup.open()
             return
 

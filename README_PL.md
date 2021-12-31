@@ -17,6 +17,8 @@ README po angielsku: [LINK](README.md)
 - Kivy
 
 ## Development environment running instructions
+Do działania potrzebujesz Pythona w wersji pomiędzy 3.6, a 3.9. Są to wersje obsługiwane przez Kivy 2.0, które ściągniesz w poniższej instrukcji
+
 1. Uruchom w terminalu `python -m pip install kivy[base]`
 2. Uruchom /src/main.py
 

@@ -17,6 +17,8 @@ README in Polish: [LINK](README_PL.md)
 - Kivy
 
 ## Development environment running instructions
+To run this application, you need Python between 3.6 and 3.9. These versions are required for Kivy 2.0 to run.
+
 1. Run `python -m pip install kivy[base]`
 2. Run /src/main.py
 
